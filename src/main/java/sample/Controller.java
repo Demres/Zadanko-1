@@ -9,53 +9,74 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.*;
+
 
 public class Controller {
 
-    public Button createLineButton;
-    public Button createCircleButton;
-    public Button createRectangleButton;
+    public Button drawLineButton, drawCircleButton, drawRectangleButton;
+    public Button createLineButton, createCircleButton, createRectangleButton;
+    public Button clearButton;
     public Pane pane;
+    public TextField lineStartX, lineEndX, lineStartY, lineEndY;
+    public TextField rectangleStartX,rectangleStartY, rectangleHeight, rectangleWidth;
+    public TextField circleStartX,circleStartY, circleRadius;
 
-    public void createLine() {
-//        Line line = new Line(50, 100, 100, 100);
-//        Circle circle = new Circle(30, 30,3, Color.RED);
-//        Point2D point = new Point2D(50, 50);
-//        circle.setOnMouseClicked(event ->{
-//            System.out.println("I was clicked");
-//            circle.setCenterX(event.getX());
-//            circle.setCenterY(event.getY());
-//        });
-//        circle.setOnMouseDragged(event -> {
-//            System.out.println("Drag over");
-//            circle.setCenterX(event.getX());
-//            circle.setCenterY(event.getY());
-//        });
-        MyLine myLine = new MyLine(50, 50, 100, 100);
+    public void drawLine() {
+        final MyLine[] myLine = new MyLine[1];
+
+        pane.setOnMousePressed(event -> {
+            myLine[0] = new MyLine(event.getX(), event.getY(), event.getX(), event.getY());
+            pane.getChildren().addAll(myLine[0].getAllNodes());
+        });
+
+        pane.setOnMouseDragged(event -> {
+            myLine[0].getCircleEnd().setCenterX(event.getX());
+            myLine[0].getCircleEnd().setCenterY(event.getY());
+            myLine[0].getLine().setEndX(event.getX());
+            myLine[0].getLine().setEndY(event.getY());
+        });
+    }
+
+    public void createLine(){
+        MyLine myLine = new MyLine(Double.parseDouble(lineStartX.getText()), Double.parseDouble(lineStartY.getText()), Double.parseDouble(lineEndX.getText()),
+                Double.parseDouble(lineEndY.getText()));
         pane.getChildren().addAll(myLine.getAllNodes());
     }
 
-    public void createCircle(){
-        Circle circle = new Circle(30, 30,3, Color.RED);
-        circle.setOnMouseDragged(event -> {
-            System.out.println("Drag over");
-            circle.setCenterX(event.getX());
-            circle.setCenterY(event.getY());
-        });
-
-        pane.getChildren().addAll(circle);
+    public void drawCircle(){
 
     }
 
-    public void createRectangle(){
-        MyRectangle myRectangle = new MyRectangle(50, 50, 30, 30);
+    public void createCircle(){
+        MyCircle myCircle = new MyCircle(Double.parseDouble(circleStartX.getText()), Double.parseDouble(circleStartY.getText()), Double.parseDouble(circleRadius.getText()));
 
-        pane.getChildren().addAll(myRectangle.getLineTop());
+        pane.getChildren().addAll(myCircle.getAllNodes());
+    }
+
+    public void drawRectangle(){
+        MyRectangle myRectangle = new MyRectangle(50, 50, 80, 120);
+
+        pane.getChildren().addAll(myRectangle.getAllNodes());
+    }
+
+    public void createRectangle(){
+        MyRectangle myRectangle = new MyRectangle(Double.parseDouble(rectangleStartX.getText()), Double.parseDouble(rectangleStartY.getText()),
+                Double.parseDouble(rectangleHeight.getText()), Double.parseDouble(rectangleWidth.getText()));
+
+        pane.getChildren().addAll(myRectangle.getAllNodes());
+    }
+
+    public void clear(){
+        pane.setOnMousePressed(event -> {});
+        pane.setOnMouseDragged(event -> {});
+    }
+
+    public void deleteAllNodes(){
+        pane.getChildren().clear();
     }
 
     @FXML

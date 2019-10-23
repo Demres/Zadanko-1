@@ -8,38 +8,59 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<BorderPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <center>
       <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-            <Button fx:id="createLineButton" mnemonicParsing="false" onAction="#createLine" text="Line" />
-          <Button fx:id="createRectangleButton" mnemonicParsing="false" onAction="#createRectangle" text="Rectangle" />
-            <Button fx:id="createCircleButton" mnemonicParsing="false" onAction="#createCircle" text="Circle" />
+            <Button fx:id="drawLineButton" mnemonicParsing="false" onAction="#drawLine" text="Draw Line" />
+          <Button fx:id="drawRectangleButton" mnemonicParsing="false" onAction="#drawRectangle" text="Draw Rectangle" />
+            <Button fx:id="drawCircleButton" mnemonicParsing="false" onAction="#drawCircle" text="Draw Circle" />
+            <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clear" text="Clear Selection" />
+            <Button fx:id="deleteALl" mnemonicParsing="false" onAction="#deleteAllNodes" text="Delete All" />
         </items>
       </ToolBar>
    </bottom>
    <left>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefWidth="135.0" BorderPane.alignment="CENTER">
          <children>
             <ToolBar prefHeight="40.0" prefWidth="200.0">
               <items>
-                <Button mnemonicParsing="false" text="Button" />
-                  <Label text="Label" />
-                  <TextField />
+                <Button fx:id="createLineButton" mnemonicParsing="false" onAction="#createLine" text="Create Line" />
+                  <Label text="StartX" />
+                  <TextField fx:id="lineStartX" />
+                  <Label text="StartY" />
+                  <TextField fx:id="lineStartY" />
+                  <Label text="EndX" />
+                  <TextField fx:id="lineEndX" />
+                  <Label text="EndY" />
+                  <TextField fx:id="lineEndY" />
               </items>
             </ToolBar>
             <ToolBar prefHeight="40.0" prefWidth="200.0">
               <items>
-                <Button mnemonicParsing="false" text="Button" />
+                <Button fx:id="createRectangleButton" mnemonicParsing="false" onAction="#createRectangle" text="Create Rectangle" />
+                  <Label text="StartX" />
+                  <TextField fx:id="rectangleStartX" />
+                  <Label text="StartY" />
+                  <TextField fx:id="rectangleStartY" />
+                  <Label text="Height" />
+                  <TextField fx:id="rectangleHeight" />
+                  <Label text="Width" />
+                  <TextField fx:id="rectangleWidth" />
               </items>
             </ToolBar>
             <ToolBar prefHeight="40.0" prefWidth="200.0">
               <items>
-                <Button mnemonicParsing="false" text="Button" />
+                <Button fx:id="createCircleButton" mnemonicParsing="false" onAction="#createCircle" text="Create Circle" />
+                  <Label text="StartX" />
+                  <TextField fx:id="circleStartX" />
+                  <Label text="StartY" />
+                  <TextField fx:id="circleStartY" />
+                  <Label text="Radius" />
+                  <TextField fx:id="circleRadius" />
               </items>
             </ToolBar>
          </children>
